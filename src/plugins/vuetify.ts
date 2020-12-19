@@ -5,6 +5,5 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
     preset,
-    rtl: true,
     theme: {dark:true}
 });
