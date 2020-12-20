@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import JobsComponent from '../views/Jobs.vue'
+import TasksComponent from '../views/Tasks.vue'
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -14,6 +15,12 @@ const routes: Array<RouteConfig> = [
     path: '/jobs',
     name: 'Jobs',
     component: JobsComponent
+  }
+  ,
+  {
+    path: '/tasks',
+    name: 'Tasks',
+    component: TasksComponent
   }
 ]
 
