@@ -25,8 +25,8 @@ export async function getCandidates(offset: number, size: number, name: string) 
         size: size+'',
         aggregate: 'false',
         offset: offset +''
-    });
-    const fetchParams = {
+    });    
+    const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -37,11 +37,7 @@ export async function getCandidates(offset: number, size: number, name: string) 
         },
         redirect: 'follow', // manual, *follow, error
         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify({}) // body data type must match "Content-Type" header
-        }
-    if(name!= undefined && name !== '') {
-        fetchParams.body = JSON.stringify({name: {term: name}});
-    }
-    const response = await fetch(url, fetchParams);
+        body: name!= undefined && name !== '' ? JSON.stringify({name: {term: name}}) : JSON.stringify({}) // body data type must match "Content-Type" header
+        });
     return response.json();
 }
