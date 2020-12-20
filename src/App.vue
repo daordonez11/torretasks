@@ -11,6 +11,7 @@
       app
       fixed
       expand-on-hover
+      temporary
     >
      <v-list nav>
       <v-list-item
@@ -37,7 +38,12 @@
       
     </v-main>
     <v-footer app>
-      <h1>Redefining profile completion</h1>
+      <v-row
+            align="center"
+            justify="center"
+        >
+        <h3>Redefining profile completion</h3>
+      </v-row>      
     </v-footer>
   </v-app>
 </template>

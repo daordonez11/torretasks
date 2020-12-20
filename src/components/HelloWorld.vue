@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
-          :src="require('../assets/logo.svg')"
+          src="https://torre-media.s3-us-west-2.amazonaws.com/organizations/Torre+(generic)+-+Dark+icon+-+Lime+(x2).png"
           class="my-3"
           contain
           height="200"
@@ -12,16 +12,14 @@
 
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
+          Welcome to Torre Tasks
         </h1>
 
         <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
+          Please select a job and a candidate to generate a list of tasks/skills
+          <br>
+          You can export and save the list of missing skills to fulfil a job
+          
         </p>
       </v-col>
 
@@ -30,19 +28,18 @@
         cols="12"
       >
         <h2 class="headline font-weight-bold mb-3">
-          What's next?
+          How to?
         </h2>
 
         <v-row justify="center">
-          <a
+          <router-link
             v-for="(next, i) in whatsNext"
             :key="i"
-            :href="next.href"
+            :to="next.href"
             class="subheading mx-3"
-            target="_blank"
           >
             {{ next.text }}
-          </a>
+          </router-link>
         </v-row>
       </v-col>
 
@@ -51,28 +48,7 @@
         cols="12"
       >
         <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
+          Made With
         </h2>
 
         <v-row justify="center">
@@ -112,40 +88,18 @@
           href: 'https://github.com/vuetifyjs/awesome-vuetify',
         },
       ],
-      importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com',
-        },
-        {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com',
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuejs.com/vuetify',
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs',
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify',
-        },
-      ],
       whatsNext: [
         {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer',
+          text: 'Select a Job',
+          href: '/jobs',
         },
         {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
+          text: 'Select a Candidate',
+          href: '/candidates',
         },
         {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
+          text: 'Export/Save Skill List',
+          href: '/tasks',
         },
       ],
     }),

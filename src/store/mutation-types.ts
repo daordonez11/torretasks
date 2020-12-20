@@ -1,0 +1,2 @@
+export const SET_JOB_MUTATION = 'SET_JOB'
+export const SET_CANDIDATE_MUTATION = 'SET_CANDIDATE'
