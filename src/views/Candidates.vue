@@ -1,25 +1,25 @@
 <template>
-    <div class="mx-10" >
+    <div class="mx-10">
         <v-row v-if="!loading"
         >
             <v-col
-            cols="4"
-            v-for="job in jobs"
-            :key="job.id"           
+            cols="6"
+            v-for="candidate in candidates"
+            :key="candidate.id"           
             >
-                <job-card
+                <candidate-card
                    
-                    :job="job"
-                    :currentSelectedJob="selectedJob"
-                    v-on:select-job="selectJob"
+                    :candidate="candidate"
+                    :currentSelectedCandidate="selectedCandidate"
+                    v-on:select-candidate="selectCandidate"
                 />
             </v-col>
             
         </v-row>
         <v-row v-if="loading">
             <v-col
-            cols="4"
-            v-for="n in 3"
+            cols="6"
+            v-for="n in 4"
             :key="n"           
             >
                 <v-skeleton-loader                    
@@ -57,44 +57,45 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import * as TorreService from '../services/TorreService'
-import JobCard from '@/components/JobCard.vue';
-import { SET_JOB_MUTATION } from '@/store/mutation-types';
+import CandidateCard from '@/components/CandidateCard.vue';
+import { SET_CANDIDATE_MUTATION } from '@/store/mutation-types';
 @Component({
-    name: "JobsComponent",
+    name: "CandidatesComponent",
     components:{
-        JobCard
+        CandidateCard
     }
 })
-export default class JobsComponent extends Vue {
+export default class CandidatesComponent extends Vue {
     loading = true;
-    jobs = [];
+    candidates = [];
     offset = 0;
     total = 0;
     size = 6;
     mounted() {
-        this.fetchJobs();
+        this.fetchCandidates();
     }
 
     changeOffset(changeValue: number) {
         this.loading = true;
         this.offset = this.offset + changeValue;
-        this.fetchJobs();
+        this.fetchCandidates();
     }
 
-    fetchJobs(){
-        TorreService.getJobs(this.offset, this.size).then((response) =>{            
+    fetchCandidates(){
+        TorreService.getCandidates(this.offset, this.size,'').then((response) =>{
+            console.log(response);
             this.loading = false;
-            this.jobs = response.results;
+            this.candidates = response.results;
             this.total = response.total;
         })
     }
     
-    selectJob(selJob: any) {
-        this.$store.commit(SET_JOB_MUTATION, { job: selJob})
+    selectCandidate(selCandidate: any) {
+        this.$store.commit(SET_CANDIDATE_MUTATION, { candidate: selCandidate})
     }
 
-    get selectedJob() {
-        return this.$store.state.currentJob;
+    get selectedCandidate() {
+        return this.$store.state.currentCandidate;
     }
 
 }
