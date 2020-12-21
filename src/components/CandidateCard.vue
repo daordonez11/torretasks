@@ -1,6 +1,7 @@
 <template>
   <v-card v-if="candidate!=undefined"
-  class="px-2">
+  class="px-2"
+  :class="{'active-candidate': candidate.subjectId===currentSelectedCandidate.subjectId}">
     <v-card-title class="search-result-card__card-title">
         
             <v-avatar
@@ -78,6 +79,11 @@ export default class CandidateCard extends Vue {
 .skill {
     border-color: #cddc39;
     border-width: thin;
+    border-style: solid;
+}
+.active-candidate {
+    border-color: #cddc39;
+    border-width: thick;
     border-style: solid;
 }
 ::-webkit-scrollbar {

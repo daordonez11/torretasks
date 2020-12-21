@@ -1,6 +1,7 @@
 <template>
   <v-card v-if="candidate!=undefined"
-  class="px-2">
+  class="px-2"
+  :class="{'active-list':candidate.subjectId===currentSelectedCandidate.subjectId && job.id===currentSelectedJob.id}">
     <v-card-title class="search-result-card__card-title">
             <v-avatar
             class="mx-5"
@@ -40,7 +41,7 @@
         <v-icon
         right>
         mdi-delete
-      </v-icon>
+        </v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -77,6 +78,11 @@ export default class StoredListCard extends Vue {
 .skill {
     border-color: #cddc39;
     border-width: thin;
+    border-style: solid;
+}
+.active-list {
+    border-color: #cddc39;
+    border-width: thick;
     border-style: solid;
 }
 ::-webkit-scrollbar {

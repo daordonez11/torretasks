@@ -18,7 +18,7 @@
         <p class="subheading font-weight-regular">
           Please select a job and a candidate to generate a list of tasks/skills
           <br>
-          You can export and save the list of missing skills to fulfil a job
+          You can copy, save and email the list of missing skills to fulfil a job
           
         </p>
       </v-col>

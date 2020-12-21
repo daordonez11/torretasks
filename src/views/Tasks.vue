@@ -12,7 +12,8 @@
                     :currentSelectedJob="selectedJob"
                 />
                 <v-btn
-                    text
+                    class="mx-5 my-5"
+                    outlined
                     to="/jobs"
                 >
                     Select other Job
@@ -64,14 +65,20 @@
                     Save
                     </v-btn>
                     <v-btn
-                        text                        
+                        text
+                        @click="sendListInEmail"
                     >
                     Send Email
                     </v-btn>
                     <v-btn
-                        text                        
+                        text
+                        @click="copyListToClipboard"
                     >
-                    Export
+                    Copy 
+                    <v-icon
+                        right>
+                        mdi-content-copy
+                    </v-icon>                    
                     </v-btn>                    
                 </v-card-actions>
             </v-card>
@@ -87,7 +94,8 @@
                     :currentSelectedCandidate="selectedCandidate"
                 />
                 <v-btn
-                    text
+                    class="mx-5 my-5"
+                    outlined
                     to="/candidates"
                 >
                     Select other Candidate
@@ -115,8 +123,7 @@
             v-for="storedList in storedTasks"
             :key="storedList.job.id+'-'+storedList.candidate.subjectId"           
             >
-                <stored-list-card
-                   
+                <stored-list-card                   
                     :job="storedList.job"
                     :candidate="storedList.candidate"
                     :currentSelectedJob="selectedJob"
@@ -126,6 +133,23 @@
                 />
             </v-col>
         </v-row>
+        <v-snackbar
+        v-model="snackbarShown"
+        timeout="3000"
+        >
+        {{ snackbarText }}
+
+        <template v-slot:action="{ attrs }">
+            <v-btn
+            color="blue"
+            text
+            v-bind="attrs"
+            @click="snackbarShown = false"
+            >
+            Close
+            </v-btn>
+        </template>
+        </v-snackbar>
     </div>
   
 </template>
@@ -147,6 +171,8 @@ import { SET_CANDIDATE_MUTATION, SET_JOB_MUTATION } from '@/store/mutation-types
 })
 export default class TasksComponent extends Vue {
     storedTasks = [];
+    snackbarShown = false;
+    snackbarText = '';
     get selectedJob() {
         return this.$store.state.currentJob;
     }
@@ -176,7 +202,8 @@ export default class TasksComponent extends Vue {
             .doc(this.selectedJob.id+'-'+this.selectedCandidate.subjectId)
             .set(tasksTodo)
             .then(() => {
-               //TODO show alert
+               this.snackbarShown = true;
+                this.snackbarText = 'Element saved in storage';
             })
     }
 
@@ -190,9 +217,62 @@ export default class TasksComponent extends Vue {
             .doc(storedList.job.id+'-'+storedList.candidate.subjectId)
             .delete()
             .then(() => {
-               //TODO show alert
+                this.snackbarShown = true;
+                this.snackbarText = 'List deleted from storage';
             })
+    }
+    
+    copyText(text: string) {
+            const copyFrom = document.createElement('textarea');
+            copyFrom.setAttribute("style", "position:fixed;opacity:0;top:100px;left:100px;");
+            copyFrom.value = text;
+            document.body.appendChild(copyFrom);
+            copyFrom.select();
+            document.execCommand('copy');
+            const copied = document.createElement('div');
+            copied.setAttribute('class', 'copied');
+            copied.appendChild(document.createTextNode('Copied to Clipboard'));
+            document.body.appendChild(copied);
+            setTimeout(function () {
+                document.body.removeChild(copyFrom);
+                document.body.removeChild(copied);
+            }, 1500);
+    }
+
+    copyListToClipboard(){
+        this.copyText(this.generateSkillListString())
+        this.snackbarShown = true;
+        this.snackbarText = 'Succesfully copied information';
+    }
+
+    sendListInEmail(){
+        const reducer = (accumulator: string, currentValue: any, index: number) =>
+             accumulator + (index!=0?", ":"")+ currentValue.name;
+        window.location.href='mailto:?subject=Required Skills&body='+this.generateSkillListString()
+    }
+
+    generateSkillListString(){
+        const reducer = (accumulator: string, currentValue: any, index: number) =>
+            accumulator + (index!=0?", ":"")+ currentValue.name;  
+        return this.requiredSkills.reduce(reducer,"")
     }
 
 }
 </script>
+
+<style scoped>
+.copied {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    width: 200px;
+    text-align: center;
+    color: #3c763d;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-left: -100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+</style>

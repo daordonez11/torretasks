@@ -1,6 +1,8 @@
 <template>
   <v-card v-if="job!=undefined"
-  class="px-2">
+  class="px-2"
+  :class="{'active-job': job.id===currentSelectedJob.id}"
+  >
     <v-card-title class="search-result-card__card-title">
         
             <v-avatar
@@ -79,6 +81,11 @@ export default class JobCard extends Vue {
 .skill {
     border-color: #cddc39;
     border-width: thin;
+    border-style: solid;
+}
+.active-job {
+    border-color: #cddc39;
+    border-width: thick;
     border-style: solid;
 }
 ::-webkit-scrollbar {

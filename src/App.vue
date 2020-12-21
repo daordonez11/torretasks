@@ -42,26 +42,27 @@
             align="center"
             justify="center"
         >
-        <h3>Redefining profile completion</h3>
+        <h3 v-if="selectedJob.id==undefined"> Begin by selecting a job in <router-link to="/jobs">Jobs</router-link></h3>
+        <h3 v-if="selectedJob.id!=undefined && selectedCandidate.subjectId==undefined">
+           Now select a candidate in <router-link to="/candidates">Candidates</router-link>
+        </h3>
+        <h3 v-if="selectedJob.id!=undefined && selectedCandidate.subjectId!=undefined">
+          Work with the required skills in <router-link to="/tasks">Tasks</router-link>
+        </h3>
       </v-row>      
     </v-footer>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
-
-export default Vue.extend({
-  name: 'App',
-
-  components: {
-  },
-
-  data: () => ({
-    //
-    drawer:null,
-    menuItems: [
+@Component({
+  name: 'App'
+})
+export default class App extends Vue {
+    drawer = null
+    menuItems = [
       {
         title: 'Home',
         icon: 'mdi-star',
@@ -83,6 +84,13 @@ export default Vue.extend({
         link: '/tasks'
       },
     ]
-  }),
-});
+
+    get selectedJob() {
+        return this.$store.state.currentJob;
+    }
+
+    get selectedCandidate() {
+        return this.$store.state.currentCandidate;
+    }
+}
 </script>
