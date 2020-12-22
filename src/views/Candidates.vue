@@ -3,7 +3,9 @@
         <v-row v-if="!loading"
         >
             <v-col
-            cols="6"
+            cols="12"
+            sm="6"
+            xs="6"
             v-for="candidate in candidates"
             :key="candidate.id"           
             >
@@ -18,7 +20,9 @@
         </v-row>
         <v-row v-if="loading">
             <v-col
-            cols="6"
+            cols="12"
+            sm="6"
+            xs="6"
             v-for="n in 4"
             :key="n"           
             >

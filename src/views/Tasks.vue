@@ -3,7 +3,9 @@
         <v-row 
         >
             <v-col
-            cols="4"
+            cols="12"
+            sm="4"
+            xs="4"
             v-if="selectedJob.id!=undefined"
             >
                 <job-card
@@ -20,7 +22,9 @@
                 </v-btn>
             </v-col>
             <v-col
-            cols="4"
+            cols="12"
+            sm="4"
+            xs="4"
             v-if="selectedJob.id==undefined"         
             >
                 <v-skeleton-loader 
@@ -34,7 +38,9 @@
                     </router-link></h3>
             </v-col>
             <v-col
-            cols="4"
+            cols="12"
+            sm="4"
+            xs="4"
             >
             <v-card
             elevation="10"           
@@ -85,7 +91,9 @@
                 
             </v-col>
             <v-col
-            cols="4"
+            cols="12"
+            sm="4"
+            xs="4"
             v-if="selectedCandidate.subjectId!=undefined"
             >
                 <candidate-card
@@ -102,7 +110,9 @@
                 </v-btn>
             </v-col>
             <v-col
-            cols="4"
+            cols="12"
+            sm="4"
+            xs="4"
             v-if="selectedCandidate.subjectId==undefined"         
             >
                 <v-skeleton-loader 
@@ -119,7 +129,9 @@
         <h1>Previously Stored Lists</h1>
         <v-row>
             <v-col
-            cols="4"
+            cols="12"
+            sm="4"
+            xs="4"
             v-for="storedList in storedTasks"
             :key="storedList.job.id+'-'+storedList.candidate.subjectId"           
             >
@@ -259,20 +271,3 @@ export default class TasksComponent extends Vue {
 
 }
 </script>
-
-<style scoped>
-.copied {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    width: 200px;
-    text-align: center;
-    color: #3c763d;
-    background-color: #dff0d8;
-    border: 1px solid #d6e9c6;
-    padding: 10px 15px;
-    border-radius: 4px;
-    margin-left: -100px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-</style>

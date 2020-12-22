@@ -3,7 +3,9 @@
         <v-row v-if="!loading"
         >
             <v-col
-            cols="4"
+            cols="12"
+            sm="4"
+            xs="4"
             v-for="job in jobs"
             :key="job.id"           
             >
@@ -18,7 +20,9 @@
         </v-row>
         <v-row v-if="loading">
             <v-col
-            cols="4"
+            cols="12"
+            sm="4"
+            xs="4"
             v-for="n in 3"
             :key="n"           
             >
