@@ -11,11 +11,12 @@
 
 
 ## Storage and new functionaliy
-* Install firebase and firebase deploy in the project 2h Configure hosting with CI 2h
+* Install firebase and firebase deploy in the project 2h 
+* Configure hosting with CI 2h
 * Task functionality
-    * 	Firebase + store 2h
+    * Firebase + store 2h
     *	Send email 1h
     *	Copy List 1h
     *	Load previous analysis 1h
 
-## Total work 20h
+## Total work 22h
